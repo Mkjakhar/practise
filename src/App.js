@@ -9,6 +9,7 @@ import HeroTwo from "./components/HeroTwo";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import SwipeSlide from "./components/SwipeSlide";
 function App() {
   useEffect(() => {
     AOS.init({ once: true });
@@ -23,6 +24,7 @@ function App() {
       <Hero />
       <HoverCompo />
       <MyCalendar />
+      <SwipeSlide />
     </>
   );
 }

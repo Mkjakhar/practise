@@ -62,3 +62,32 @@
     opacity: 1;
   }
 }
+.swiper {
+  overflow: visible !important;
+}
+.mySwiper.swiper {
+  overflow: visible !important;
+}
+.swiper-button-disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.swiper-slide-active {
+  z-index: 1 !important;
+}
+.swiper-slide-prev {
+  z-index: -1 !important;
+}
+
+.swiper-slide:has(~ .swiper-slide-prev) {
+  z-index: -1 !important;
+}
+.swiper-slide-next {
+  z-index: 3 !important;
+}
+.swiper-slide-next ~ .swiper-slide {
+  z-index: 1 !important;
+}
+.index_4 {
+  z-index: 4 !important;
+}
