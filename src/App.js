@@ -15,11 +15,14 @@ function App() {
   }, []);
   return (
     <>
-      <Routes>
-        <Route path="/" element={<HeroTwo />} />
+      {/* <Routes>
+        <Route path="/" element={<HoverCompo />} />
         <Route path="/OurServices" element={<OurServices />} />
         <Route path="/MyCalendar" element={<MyCalendar />} />
-      </Routes>
+      </Routes> */}
+      <Hero />
+      <HoverCompo />
+      <MyCalendar />
     </>
   );
 }
