@@ -69,8 +69,7 @@ const SwipeSlide = () => {
       </SwiperSlide>
     );
   });
-  const handleButtonClick = () => {
-    // Toggle the class on the card elements
+  const handleIndexOnNextClick = () => {
     const cards = document.querySelectorAll(".swiper-slide-active");
     cards[0].classList.add("index_4");
   };
@@ -121,7 +120,7 @@ const SwipeSlide = () => {
             &larr;
           </div>
           <div
-            onClick={handleButtonClick}
+            onClick={handleIndexOnNextClick}
             className="swiper-next"
             style={{
               padding: "0px 14px",

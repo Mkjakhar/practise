@@ -78,14 +78,16 @@
 .swiper-slide-prev {
   z-index: -1 !important;
 }
-
 .swiper-slide:has(~ .swiper-slide-prev) {
   z-index: -1 !important;
 }
 .swiper-slide-next {
   z-index: 3 !important;
 }
-.swiper-slide-next ~ .swiper-slide {
+.swiper-slide-next + .swiper-slide {
+  z-index: 2 !important;
+}
+.swiper-slide-next + .swiper-slide ~ .swiper-slide {
   z-index: 1 !important;
 }
 .index_4 {
