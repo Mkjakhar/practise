@@ -1,71 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import tracking from "../assets/img/png/tracking.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const GsapAnimation = () => {
+  // const [eleHeight, seteleHeight] = useState(0);
+  // const elementRef = useRef(null);
+
+  // useEffect(() => {
+  //   if (elementRef.current) {
+  //     seteleHeight(elementRef.current.getBoundingClientRect().height);
+  //   }
+
+  //   window.addEventListener("resize", () => {
+  //     if (elementRef.current) {
+  //       seteleHeight(elementRef.current.getBoundingClientRect().height);
+  //     }
+  //   });
+  // }, [eleHeight]);
   useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".target",
-        start: "top center",
-        end: "bottom center",
-        markers: true,
-        scrub: true,
-      },
+    const targets = document.querySelectorAll(".target, .target2, .target3");
+
+    targets.forEach((target) => {
+      gsap.fromTo(
+        target,
+        {
+          background: "red",
+          height: "200px",
+        },
+        {
+          background: "pink",
+          height: "400px",
+          scrollTrigger: {
+            trigger: target,
+            start: "top center",
+            end: "bottom center",
+            markers: true,
+            scrub: true,
+          },
+        }
+      );
     });
-    tl.fromTo(
-      ".target",
-      {
-        background: "red",
-        maxHeight: "200px",
-      },
-      {
-        background: "pink",
-        maxHeight: "400px",
-      }
-    );
-    const tl2 = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".target2",
-        start: "top 50%",
-        end: "bottom top",
-        markers: true,
-        scrub: true,
-      },
-    });
-    tl2.fromTo(
-      ".target2",
-      {
-        background: "red",
-        maxHeight: "200px",
-      },
-      {
-        background: "pink",
-        maxHeight: "400px",
-      }
-    );
-    const tl3 = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".target3",
-        start: "top top",
-        end: "bottom top",
-        markers: true,
-        scrub: true,
-      },
-    });
-    tl3.fromTo(
-      ".target3",
-      {
-        background: "red",
-        maxHeight: "200px",
-      },
-      {
-        background: "pink",
-        maxHeight: "400px",
-      }
-    );
   }, []);
   return (
     <div>
