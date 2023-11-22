@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import tracking from "../assets/img/png/tracking.png";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -19,35 +18,54 @@ const GsapAnimation = () => {
   //     }
   //   });
   // }, [eleHeight]);
-  useEffect(() => {
-    const targets = document.querySelectorAll(".target, .target2, .target3");
 
-    targets.forEach((target) => {
-      gsap.fromTo(
-        target,
-        {
-          background: "red",
-          height: "200px",
-        },
-        {
-          background: "pink",
-          height: "400px",
+  const [up, setUp] = useState(true);
+  const targetOneRef = useRef();
+  const targetTwoRef = useRef();
+  const targetThreeRef = useRef();
+
+  useLayoutEffect(() => {
+    const targets = [
+      targetOneRef.current,
+      targetTwoRef.current,
+      targetThreeRef.current,
+    ];
+
+    const context = gsap.context(() => {
+      targets.forEach((target, index) => {
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: target,
             start: "top center",
             end: "bottom center",
             markers: true,
+            id: `target ${index + 1}`,
             scrub: true,
+            onRefresh: (x) => console.log("ref", x),
+            onUpdate: (x) => {
+              x.refresh();
+            },
           },
-        }
-      );
+        });
+
+        tl.to(target, {
+          background: "pink",
+          height: 400,
+        });
+      });
     });
+
+    return () => context.revert();
   }, []);
+
   return (
     <div>
       <div className="h-screen bg-green-400"></div>
       <div className="conatiner py-16 parent">
-        <div className="flex target">
+        <div
+          ref={targetOneRef}
+          className="flex target bg-red-500 h-52 overflow-hidden"
+        >
           <div className="w-full">
             <h1>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -61,16 +79,12 @@ const GsapAnimation = () => {
               magni qui officia? Aut dolores asperiores provident hic, sit
               accusamus reiciendis enim sapiente.
             </h1>
-          </div>
-          <div className="w-full">
-            <img
-              className="w-full target max-w-[400px] mx-auto object-cover object-top"
-              src={tracking}
-              alt="tracking"
-            />
           </div>
         </div>
-        <div className="flex target2 my-5">
+        <div
+          ref={targetTwoRef}
+          className="flex target2 my-5 bg-red-500 h-52 overflow-hidden"
+        >
           <div className="w-full">
             <h1>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -84,16 +98,12 @@ const GsapAnimation = () => {
               magni qui officia? Aut dolores asperiores provident hic, sit
               accusamus reiciendis enim sapiente.
             </h1>
-          </div>
-          <div className="w-full">
-            <img
-              className="w-full target2 max-w-[400px] mx-auto object-cover object-top"
-              src={tracking}
-              alt="tracking"
-            />
           </div>
         </div>
-        <div className="flex target3">
+        <div
+          ref={targetThreeRef}
+          className="flex target3 bg-red-500 h-52 overflow-hidden"
+        >
           <div className="w-full">
             <h1>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -107,13 +117,6 @@ const GsapAnimation = () => {
               magni qui officia? Aut dolores asperiores provident hic, sit
               accusamus reiciendis enim sapiente.
             </h1>
-          </div>
-          <div className="w-full">
-            <img
-              className="w-full target3 max-w-[400px] mx-auto object-cover object-top"
-              src={tracking}
-              alt="tracking"
-            />
           </div>
         </div>
       </div>
